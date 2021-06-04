@@ -66,7 +66,7 @@ public class Model {
 		if(condivisi>maxCondivisi) {
 			return;
 			}
-		if(condivisi>this.maxVicini) {
+		else if(condivisi>this.maxVicini) {
 			maxVicini=condivisi;
 			this.migliore= new ArrayList <>(parziale);
 		}
@@ -86,9 +86,9 @@ public class Model {
 	public int calcolaCondivisi(List<Director> parziale, int anno, Director selezionato) {
 		int condivisi=0;
 		
-		for(Adiacenza a: dao.getAdiacenza(idMap, anno)) {
-			if(a.getD1().equals(selezionato))
-				condivisi=(int) (condivisi+a.getPeso());
+		for(DefaultWeightedEdge e: this.grafo.edgesOf(selezionato)) {
+			
+				condivisi=(int) (condivisi+this.grafo.getEdgeWeight(e));
 		}
 		return condivisi;
 	}

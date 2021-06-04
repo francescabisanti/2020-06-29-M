@@ -61,6 +61,7 @@ public class FXMLController {
     	this.txtResult.appendText("#ARCHI: "+model.getArchi()+"\n");
     	List <Director> box= new ArrayList <Director>(model.getGrafo().vertexSet());
     	Collections.sort(box);
+    	this.boxRegista.getItems().clear();
     	this.boxRegista.getItems().addAll(box);
     }
 
