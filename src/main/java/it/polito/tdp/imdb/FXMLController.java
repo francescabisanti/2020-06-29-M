@@ -94,7 +94,7 @@ public class FXMLController {
     	for(Director d: result) {
     		this.txtResult.appendText(d.toString()+"\n");
     	}
-    	this.txtResult.appendText("TOT CONDIVISI: "+this.model.calcolaCondivisi(result, anno,selezionato));
+    
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete

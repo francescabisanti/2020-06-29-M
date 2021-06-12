@@ -61,22 +61,30 @@ public class Model {
 	
 	
 	private void cerca(Director partenza, List<Director> parziale, int maxCondivisi, int anno) {
-		int condivisi=calcolaCondivisi(parziale, anno, partenza);
-		//caso Terminale
-		if(condivisi>maxCondivisi) {
+		Director ultimo= parziale.get(parziale.size()-1);
+		
+		if(this.maxVicini>maxCondivisi) {
 			return;
 			}
-		else if(condivisi>this.maxVicini) {
-			maxVicini=condivisi;
+		else if(parziale.size()>this.migliore.size()) {
+			
 			this.migliore= new ArrayList <>(parziale);
+			
 		}
 			
 			
-		for(Director vicino: Graphs.neighborListOf(this.grafo,partenza)) {
+		for(Director vicino: Graphs.neighborListOf(this.grafo,ultimo)) {
 			if(!parziale.contains(vicino)) {
+				
+				// prendo l'arco tra il vicino e l'ultimo di parziale
+				DefaultWeightedEdge arco = this.grafo.getEdge(vicino, parziale.get(parziale.size()-1));
+				// salvo il peso dell'arco
+				double peso = this.grafo.getEdgeWeight(arco);
+				this.maxVicini += peso;
 				parziale.add(vicino);
 				cerca(partenza,parziale, maxCondivisi, anno);
 				parziale.remove(parziale.size()-1);
+				this.maxVicini=(int) (maxVicini-peso);
 			}
 		}
 		
